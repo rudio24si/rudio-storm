@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".pertemuan_2.SecondActivity">
+
+    <TextView
+        android:id="@+id/tv_title_datar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hitung Luas Persegi Panjang"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_panjang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan Panjang"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_datar" />
+
+    <EditText
+        android:id="@+id/et_lebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan Lebar"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/et_panjang" />
+
+    <Button
+        android:id="@+id/btn_hitung_luas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hitung Luas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_lebar" />
+
+    <TextView
+        android:id="@+id/tv_hasil_luas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hasil Luas: 0"
+        app:layout_constraintTop_toBottomOf="@id/btn_hitung_luas"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_hasil_luas" />
+
+    <TextView
+        android:id="@+id/tv_title_ruang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hitung Volume Kubus"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_sisi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan Sisi"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_ruang" />
+
+    <Button
+        android:id="@+id/btn_hitung_volume"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hitung Volume"
+        app:layout_constraintTop_toBottomOf="@id/et_sisi" />
+
+    <TextView
+        android:id="@+id/tv_hasil_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hasil Volume: 0"
+        app:layout_constraintTop_toBottomOf="@id/btn_hitung_volume"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="RUDIO24SI"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hasil_volume" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
