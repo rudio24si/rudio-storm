@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rudiostorm">
         <activity
+            android:name=".pertemuan_3.ThirdActivity"
+            android:exported="false" />
+        <activity
             android:name=".pertemuan_4.Custom2Activity"
             android:exported="false" />
         <activity
@@ -24,7 +27,7 @@
             android:name=".pertemuan_2.SecondActivity"
             android:exported="false" />
         <activity
-            android:name=".pertemuan_3.ThirdActivity"
+            android:name=".BaseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
