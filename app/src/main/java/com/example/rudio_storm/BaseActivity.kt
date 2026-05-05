@@ -29,27 +29,7 @@ class BaseActivity : AppCompatActivity() {
             insets
         }
 
-//        binding.bottomNavView.setOnItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.home -> {
-//                    Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show()
-//                    true
-//                }
-//                R.id.about -> {
-//                    Toast.makeText(this, "About Clicked", Toast.LENGTH_SHORT).show()
-//                    true
-//                }
-//                R.id.profie -> {
-//                    Toast.makeText(this, "Profie Clicked", Toast.LENGTH_SHORT).show()
-//                    true
-//                }
-//                else -> false // return false jika item tidak ada yang di klik
-//            }
-//        }
-
-        /** FragmentHome sebagai fragment default */
         replaceFragment(HomeFragment())
-
         binding.bottomNavView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
@@ -60,7 +40,7 @@ class BaseActivity : AppCompatActivity() {
                     replaceFragment(AboutFragment())
                     true
                 }
-                R.id.profie -> {
+                R.id.profile -> {
                     replaceFragment(ProfileFragment())
                     true
                 }
@@ -68,7 +48,6 @@ class BaseActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)
