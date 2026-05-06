@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rudiostorm">
         <activity
+            android:name=".pertemuan_7.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan_7.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".pertemuan_3.ThirdActivity"
             android:exported="false" />
         <activity
