@@ -2,6 +2,7 @@ package com.example.rudio_storm
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.example.rudio_storm.pertemuan_2.SecondActivity
 import com.example.rudio_storm.pertemuan_3.ThirdActivity
 import com.example.rudio_storm.pertemuan_4.Custom1Activity
 import com.example.rudio_storm.pertemuan_4.Custom2Activity
+import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -64,6 +66,15 @@ class MainActivity : AppCompatActivity() {
         // 4. Tombol Logout dengan Konfirmasi Dialog
         binding.btnLogout.setOnClickListener {
             showLogoutDialog()
+        }
+
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
+            val selectedChipId = checkedIds.firstOrNull() // Ambil ID chip yang dipilih
+            if (selectedChipId != null) {
+                val chip = group.findViewById<Chip>(selectedChipId)
+                Toast.makeText(this, "Filter: ${chip.text}", Toast.LENGTH_SHORT).show()
+                // Lakukan logika filter di sini
+            }
         }
     }
 

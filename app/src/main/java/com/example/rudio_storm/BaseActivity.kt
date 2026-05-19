@@ -12,6 +12,7 @@ import com.example.rudio_storm.databinding.ActivityMainBinding
 import com.example.rudio_storm.pertemuan_7.AboutFragment
 import com.example.rudio_storm.pertemuan_7.HomeFragment
 import com.example.rudio_storm.pertemuan_7.ProfileFragment
+import com.example.rudio_storm.pertemuan_7.SettingFragment
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding : ActivityBaseBinding
@@ -29,6 +30,7 @@ class BaseActivity : AppCompatActivity() {
             insets
         }
 
+
         replaceFragment(HomeFragment())
         binding.bottomNavView.setOnItemSelectedListener {
             when (it.itemId) {
@@ -42,6 +44,9 @@ class BaseActivity : AppCompatActivity() {
                 }
                 R.id.profile -> {
                     replaceFragment(ProfileFragment())
+                    true
+                }R.id.setting -> {
+                    replaceFragment(SettingFragment())
                     true
                 }
                 else ->false

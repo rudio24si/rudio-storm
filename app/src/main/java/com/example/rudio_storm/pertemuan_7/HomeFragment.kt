@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.rudio_storm.databinding.FragmentHomeBinding
 import com.example.rudio_storm.pertemuan_2.SecondActivity
 import com.example.rudio_storm.pertemuan_4.Custom1Activity
 import com.example.rudio_storm.pertemuan_4.Custom2Activity
+import com.google.android.material.chip.Chip
 
 class HomeFragment : Fragment() {
 
@@ -46,6 +48,14 @@ class HomeFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             showLogoutConfirmation()
+        }
+
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
+            val selectedChipId = checkedIds.firstOrNull()
+            if (selectedChipId != null) {
+                val chip = group.findViewById<Chip>(selectedChipId)
+                Toast.makeText(requireContext(), "Filter: ${chip.text}", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Catatan: Jika ingin pindah antar FRAGMENT, gunakan FragmentManager
