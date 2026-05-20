@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.rudio_storm.KamarActivity
+import com.example.rudio_storm.adapter.KamarAdapter
 import com.example.rudio_storm.databinding.FragmentHomeBinding
 import com.example.rudio_storm.pertemuan_2.SecondActivity
 import com.example.rudio_storm.pertemuan_4.Custom1Activity
@@ -43,6 +45,11 @@ class HomeFragment : Fragment() {
 
         binding.btnCustom2.setOnClickListener {
             val intent = Intent(requireContext(), Custom2Activity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnCustom3.setOnClickListener {
+            val intent = Intent(requireContext(), KamarActivity::class.java)
             startActivity(intent)
         }
 

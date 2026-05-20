@@ -83,6 +83,22 @@
             app:elevation="4dp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCustom3"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#3F51B5"
+            android:text="Kamar"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_menu_manage"
+            app:iconGravity="textStart"
+            app:iconTint="#FFFFFF"
+            app:elevation="4dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="65dp"
