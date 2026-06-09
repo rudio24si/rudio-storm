@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3F51B5"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <ImageView
+        android:id="@+id/imgOnboarding1"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:src="@android:drawable/ic_menu_search"
+        android:contentDescription="Slide 1 Image" />
+
+    <TextView
+        android:id="@+id/tvTitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Selamat Datang di Portal Berita"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/tvDescription1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Temukan berbagai informasi menarik dan berita terupdate langsung dari perangkat genggam Anda."
+        android:textColor="#E0E0E0"
+        android:textSize="16sp"
+        android:textAlignment="center"/>
+
+</LinearLayout>

@@ -7,13 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rudio_storm.KamarActivity
 import com.example.rudio_storm.adapter.KamarAdapter
+import com.example.rudio_storm.adapter.PhotoAdapter
+import com.example.rudio_storm.data.api.PhotoApiClient
 import com.example.rudio_storm.databinding.FragmentHomeBinding
 import com.example.rudio_storm.pertemuan_2.SecondActivity
 import com.example.rudio_storm.pertemuan_4.Custom1Activity
 import com.example.rudio_storm.pertemuan_4.Custom2Activity
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -65,6 +71,8 @@ class HomeFragment : Fragment() {
             }
         }
 
+        loadPhoto()
+
         // Catatan: Jika ingin pindah antar FRAGMENT, gunakan FragmentManager
         // Contoh: parentFragmentManager.beginTransaction().replace(R.id.container, ProfileFragment()).commit()
     }
@@ -91,6 +99,20 @@ class HomeFragment : Fragment() {
         // Membuat dan menampilkan dialog
         val alertDialog = builder.create()
         alertDialog.show()
+    }
+
+    private fun loadPhoto() {
+        lifecycleScope.launch {
+            try {
+                val photos = PhotoApiClient.apiService.getPhotos()
+                val adapter = PhotoAdapter(photos)
+                binding.rvGallery.adapter = adapter
+                binding.rvGallery.layoutManager = GridLayoutManager(requireContext(),2)
+
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {

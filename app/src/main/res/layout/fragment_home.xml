@@ -116,12 +116,10 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroupFilter"
-            android:layout_width="wrap_content"  android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogout"
-            app:layout_constraintHorizontal_bias="0.5" app:singleSelection="true">
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTerbaru"
@@ -155,6 +153,14 @@
             android:layout_marginTop="40dp"
             android:textColor="#666666"
             android:textSize="12sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
 </ScrollView>

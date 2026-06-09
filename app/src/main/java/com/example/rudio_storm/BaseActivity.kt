@@ -8,7 +8,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.rudio_storm.databinding.ActivityBaseBinding
-import com.example.rudio_storm.databinding.ActivityMainBinding
 import com.example.rudio_storm.pertemuan_7.AboutFragment
 import com.example.rudio_storm.pertemuan_7.HomeFragment
 import com.example.rudio_storm.pertemuan_7.ProfileFragment
