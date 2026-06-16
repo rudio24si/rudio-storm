@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rudio_storm.KamarActivity
 import com.example.rudio_storm.adapter.KamarAdapter
+import com.example.rudio_storm.adapter.NoteAdapter
 import com.example.rudio_storm.adapter.PhotoAdapter
+import com.example.rudio_storm.data.AppDatabase
 import com.example.rudio_storm.data.api.PhotoApiClient
+import com.example.rudio_storm.data.model.NoteEntity
 import com.example.rudio_storm.databinding.FragmentHomeBinding
 import com.example.rudio_storm.pertemuan_2.SecondActivity
 import com.example.rudio_storm.pertemuan_4.Custom1Activity
@@ -26,11 +29,15 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    // Note
+    private lateinit var db: AppDatabase
+    private lateinit var noteAdapter: NoteAdapter
+    private val notes = mutableListOf<NoteEntity>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inisialisasi Binding
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,27 +45,19 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Navigasi ke Activity (Jika masih ingin pindah Activity)
+        // Navigasi tombol menu
         binding.btnRumus.setOnClickListener {
-            val intent = Intent(requireContext(), SecondActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), SecondActivity::class.java))
         }
-
         binding.btnCustom1.setOnClickListener {
-            val intent = Intent(requireContext(), Custom1Activity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), Custom1Activity::class.java))
         }
-
         binding.btnCustom2.setOnClickListener {
-            val intent = Intent(requireContext(), Custom2Activity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), Custom2Activity::class.java))
         }
-
         binding.btnCustom3.setOnClickListener {
-            val intent = Intent(requireContext(), KamarActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), KamarActivity::class.java))
         }
-
         binding.btnLogout.setOnClickListener {
             showLogoutConfirmation()
         }
@@ -72,33 +71,44 @@ class HomeFragment : Fragment() {
         }
 
         loadPhoto()
-
-        // Catatan: Jika ingin pindah antar FRAGMENT, gunakan FragmentManager
-        // Contoh: parentFragmentManager.beginTransaction().replace(R.id.container, ProfileFragment()).commit()
+        setupNote()
     }
 
-    private fun showLogoutConfirmation() {
-        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        builder.setTitle("Konfirmasi Logout")
-        builder.setMessage("Apakah Anda yakin ingin keluar dari aplikasi?")
+    private fun setupNote() {
+        db = AppDatabase.getInstance(requireContext())
+        noteAdapter = NoteAdapter(notes, this)
 
-        // Jika user memilih "Ya"
-        builder.setPositiveButton("Ya") { _, _ ->
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            // Bersihkan stack activity agar tidak bisa back ke Home
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            requireActivity().finish()
+        binding.rvNotes.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvNotes.adapter = noteAdapter
+
+        binding.fabAddNote.setOnClickListener {
+            startActivity(Intent(requireContext(), NoteFormActivity::class.java))
         }
 
-        // Jika user memilih "Batal"
-        builder.setNegativeButton("Batal") { dialog, _ ->
-            dialog.dismiss()
-        }
+        fetchNotes()
+    }
 
-        // Membuat dan menampilkan dialog
-        val alertDialog = builder.create()
-        alertDialog.show()
+    private fun fetchNotes() {
+        lifecycleScope.launch {
+            val data = db.noteDao().getAll()
+            notes.clear()
+            notes.addAll(data)
+            noteAdapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::noteAdapter.isInitialized) {
+            fetchNotes()
+        }
+    }
+
+    fun deleteNote(note: NoteEntity) {
+        lifecycleScope.launch {
+            db.noteDao().delete(note)
+            fetchNotes()
+        }
     }
 
     private fun loadPhoto() {
@@ -107,12 +117,27 @@ class HomeFragment : Fragment() {
                 val photos = PhotoApiClient.apiService.getPhotos()
                 val adapter = PhotoAdapter(photos)
                 binding.rvGallery.adapter = adapter
-                binding.rvGallery.layoutManager = GridLayoutManager(requireContext(),2)
-
+                binding.rvGallery.layoutManager = GridLayoutManager(requireContext(), 2)
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showLogoutConfirmation() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setTitle("Konfirmasi Logout")
+        builder.setMessage("Apakah Anda yakin ingin keluar dari aplikasi?")
+        builder.setPositiveButton("Ya") { _, _ ->
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            requireActivity().finish()
+        }
+        builder.setNegativeButton("Batal") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
     }
 
     override fun onDestroyView() {
